@@ -2,6 +2,7 @@ package com.ott.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,15 @@ public class OttController {
 	public ResponseEntity<Subscription> controllerUpdateDetails(@PathVariable String uniqueRefNum, @RequestBody Customer customer){
 		Subscription updateSubscription = ottService.updateSubscription(uniqueRefNum, customer);
 		return new ResponseEntity<Subscription>(updateSubscription, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/cancelSubscription/{uniqueRefNum}")
+	public ResponseEntity<String> controllerCancelTicket(@PathVariable String uniqueRefNum){
+		Boolean cancelSubscription = ottService.cancelSubscription(uniqueRefNum);
+		if(cancelSubscription) {
+			return new ResponseEntity<String>("Subscription cancelled successfully", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("There is no active subscription with the given reference number", HttpStatus.OK);
 	}
 	
 	

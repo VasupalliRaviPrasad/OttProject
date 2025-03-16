@@ -8,5 +8,6 @@ public interface OttService {
 	public Subscription subscribe(Customer customer);
 	public Subscription getMySubscriptions(String uniqueRefNum);
 	public Subscription updateSubscription(String uniqueRefNum, Customer customer);
+	public Boolean cancelSubscription(String uniqueRefNum);
 
 }
