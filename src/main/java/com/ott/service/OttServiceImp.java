@@ -79,6 +79,7 @@ public class OttServiceImp implements OttService {
 	public Boolean cancelSubscription(String uniqueRefNum) {
 		SubscriptionEntity hasSubscription = subscriptionRepo.findByUniqueRefNum(uniqueRefNum);
 		if(hasSubscription!= null) {
+			subscriptionRepo.deleteById(hasSubscription.getSno());
 			return true;
 		}
 		return false;
